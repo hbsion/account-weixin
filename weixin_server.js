@@ -4,7 +4,8 @@ OAuth.registerService('weixin', 2, null, function(query) {
   var response = getTokenResponse(query);
   var accessToken = response.access_token;
   var identity = {};
-  
+  console.log(response);
+
   if(response.scope == 'snsapi_userinfo') identity = JSON.parse(getIdentity(accessToken, response.openid));
 
   var serviceData = _.extend({
