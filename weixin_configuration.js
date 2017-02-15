@@ -1,10 +1,10 @@
-Template.configureLoginServiceDialogForWechat.helpers({
+Template.configureLoginServiceDialogForWeixin.helpers({
   siteUrl: function () {
     return Meteor.absoluteUrl();
   }
 });
 
-Template.configureLoginServiceDialogForWechat.fields = function () {
+Template.configureLoginServiceDialogForWeixin.fields = function () {
   return [
     {property: 'appId', label: 'APP Id'},
     {property: 'secret', label: 'APP Secret'}

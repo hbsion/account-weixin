@@ -1,6 +1,6 @@
-Wechat = {};
+Weixin = {};
 
-OAuth.registerService('wechat', 2, null, function(query) {
+OAuth.registerService('weixin', 2, null, function(query) {
   var response = getTokenResponse(query);
   var accessToken = response.access_token;
   //var identity = response.user;
@@ -16,13 +16,13 @@ OAuth.registerService('wechat', 2, null, function(query) {
     serviceData: serviceData,
     options: {
       profile: { name: JSON.parse(identity).nickname },
-      services: { wechat: JSON.parse(identity) }
+      services: { weixin: JSON.parse(identity) }
     }
   };
 });
 
 var getTokenResponse = function (query) {
-  var config = ServiceConfiguration.configurations.findOne({service: 'wechat'});
+  var config = ServiceConfiguration.configurations.findOne({service: 'weixin'});
 
   if (!config)
     throw new ServiceConfiguration.ConfigError();
@@ -46,7 +46,7 @@ var getTokenResponse = function (query) {
     if (response.content.error)
         throw response.content;
   } catch (err) {
-    throw _.extend(new Error("Failed to complete OAuth handshake with Wechat. " + err.message),
+    throw _.extend(new Error("Failed to complete OAuth handshake with Weixin. " + err.message),
                    {response: err.response});
   }
 
@@ -61,11 +61,11 @@ var getIdentity = function (accessToken, openid) {
     response.id = response.openid;
     return response;
   } catch (err) {
-    throw _.extend(new Error("Failed to fetch identity from Wechat. " + err.message),
+    throw _.extend(new Error("Failed to fetch identity from Weixin. " + err.message),
                    {response: err.response});
   }
 };
 
-Wechat.retrieveCredential = function(credentialToken, credentialSecret) {
+Weixin.retrieveCredential = function(credentialToken, credentialSecret) {
   return OAuth.retrieveCredential(credentialToken, credentialSecret);
 };

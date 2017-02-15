@@ -1,6 +1,6 @@
 Package.describe({
   name: 'hbsion:account-weixin',
-  version: '0.0.6',
+  version: '1.0.0',
   // Brief, one-line summary of the package.
   summary: '',
   // URL to the Git repository containing the source code for this package.
@@ -26,14 +26,14 @@ Package.onUse(function(api) {
   api.use('service-configuration', ['client', 'server']);
   api.use('base64', 'client');
 
-  api.add_files('wechat_client.js', 'client');
-  api.add_files('wechat_server.js', 'server');
-  api.add_files("wechat.js");
+  api.add_files('weixin_client.js', 'client');
+  api.add_files('weixin_server.js', 'server');
+  api.add_files("weixin.js");
 
-  api.export('Wechat');
+  api.export('Weixin');
   api.add_files([
-    'wechat_configuration.html',
-    'wechat_configuration.js',
-    'wechat_login_button.css'
+    'weixin_configuration.html',
+    'weixin_configuration.js',
+    'weixin_login_button.css'
   ],'client');
 });
