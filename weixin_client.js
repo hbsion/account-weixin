@@ -25,7 +25,6 @@ Weixin.requestCredential = function (options, credentialRequestCompleteCallback)
       '&scope=' + flatScope +
       '&state=' + state;
       //'&state=' + OAuth._stateParam(loginStyle,credentialToken);
-
   OAuth.launchLogin({
     loginService: "weixin"
     , loginStyle: "redirect"

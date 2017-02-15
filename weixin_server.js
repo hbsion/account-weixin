@@ -3,15 +3,12 @@ Weixin = {};
 OAuth.registerService('weixin', 2, null, function(query) {
   var response = getTokenResponse(query);
   var accessToken = response.access_token;
-  //var identity = response.user;
   var identity = getIdentity(accessToken, response.openid);
-
-  var serviceData = _.extend(identity, {accessToken: response.access_token});
-
-  // include helpful fields from twitter
-  var fields = _.pick(identity, Twitter.whitelistedFields);
-  _.extend(serviceData, fields);
-
+  var serviceData = _.extend(identity, {
+    id: response.openid,
+    accessToken: response.access_token,
+    expiresAt: (+new Date) + (1000 * response.expires_in)
+  });
   return {
     serviceData: serviceData,
     options: {
@@ -55,11 +52,10 @@ var getTokenResponse = function (query) {
 
 var getIdentity = function (accessToken, openid) {
   try {
-    response = HTTP.get(
+    Identity_temp = HTTP.get(
       "https://api.weixin.qq.com/sns/userinfo",
       {params: {access_token: accessToken, openid: openid,lang:"zh_CN"}}).content;
-    response.id = response.openid;
-    return response;
+    return Identity_temp;
   } catch (err) {
     throw _.extend(new Error("Failed to fetch identity from Weixin. " + err.message),
                    {response: err.response});
