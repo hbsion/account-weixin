@@ -14,7 +14,7 @@ Weixin.requestCredential = function (options, credentialRequestCompleteCallback)
   }
   var credentialToken = Random.secret();
   var loginStyle = OAuth._loginStyle('weixin', config, options);
-  var scope = (options && options.requestPermissions) || ['snsapi_userinfo'];
+  var scope = (options && options.scope) || ['snsapi_userinfo'];
   var flatScope = _.map(scope, encodeURIComponent).join('+');
   var state = OAuth._stateParam(loginStyle,credentialToken, options && options.redirectUrl);
   var loginUrl =

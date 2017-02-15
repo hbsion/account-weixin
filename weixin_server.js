@@ -3,17 +3,30 @@ Weixin = {};
 OAuth.registerService('weixin', 2, null, function(query) {
   var response = getTokenResponse(query);
   var accessToken = response.access_token;
-  var identity = getIdentity(accessToken, response.openid);
-  var serviceData = _.extend(identity, {
+  var identity = {};
+  
+  if(response.scope == 'snsapi_userinfo') identity = JSON.parse(getIdentity(accessToken, response.openid));
+
+  var serviceData = _.extend({
     id: response.openid,
+    openid: response.openid,
     accessToken: response.access_token,
     expiresAt: (+new Date) + (1000 * response.expires_in)
-  });
+  },identity);
+
+
+  var profile = {openid:response.openid};
+
+  if(response.scope == 'snsapi_userinfo'){
+    profile.name = identity.nickname;
+    profile.avatar = identity.headimgurl;
+  }
+
   return {
     serviceData: serviceData,
     options: {
-      profile: { name: JSON.parse(identity).nickname },
-      services: { weixin: JSON.parse(identity) }
+      profile: profile,
+      services: { weixin: identity }
     }
   };
 });
