@@ -1,6 +1,6 @@
 Package.describe({
   name: 'hbsion:account-weixin',
-  version: '1.0.0',
+  version: '0.1.0',
   summary: 'meteor accounts package for wechat, not need open.weixin.qq.com',
   git: 'https://github.com/hbsion/account-weixin.git',
   documentation: 'README.md'
