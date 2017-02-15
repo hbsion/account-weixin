@@ -16,8 +16,7 @@ if (Meteor.isClient) {
     forLoggedInUser: ['services.wechat'],
     forOtherUsers: [
       'services.wechat.nickname',
-      'services.wechat.full_name',
-      'services.wechat.headimgurl'
-    ]
+      'services.wechat.openid',
+    ],
   });
 }
